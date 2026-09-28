@@ -1,0 +1,11 @@
+Use this repository as the official visual and UX baseline for IMÜSIC★.
+
+Do not redesign it into Spotify, TikTok, or a generic streaming dashboard.
+Preserve the retro 2009 artist-community structure with modern clean controls.
+The IMÜSIC wordmark is white in the platform interface and the star/accent uses the standard purple.
+Artist Worlds must always allow a custom background and keep that background visible on mobile.
+The profile editor must remain simple: profile photo, banner, required background, basic info, button/theme colors, module toggles, upload video, social links, live preview, save.
+Apple and Google sign-in buttons must remain visible.
+
+Production architecture target:
+Firebase Auth + Firestore + Cloudflare R2 + Cloudflare Stream.

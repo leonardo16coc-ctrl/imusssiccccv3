@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Register as an Artist — IMÜSIC★</title>
+  <meta name="description" content="Create your IMÜSIC artist channel. Share music videos and connect with fans.">
+  <link rel="icon" href="assets/favicon.ico">
+  <link rel="stylesheet" href="css/styles.css">
+  <script type="module" src="js/state.js"></script>
+  <script type="module" src="js/auth.js"></script>
+</head>
+<body class="auth-page">
+  <header class="site-header">
+    <div class="header-main">
+      <a class="brand" href="index.html">
+        <div class="brand-logo">IMÜSIC<span class="star">★</span></div>
+        <div class="brand-tag">MUSIC CONNECTS US.</div>
+      </a>
+      <nav class="main-nav"><a href="memberships.html">Memberships</a><a href="verification.html">Verification</a>
+        <a href="index.html">Home</a>
+        <a href="artist.html">Videos</a>
+        <a href="reels.html">Reels & Shorts ★</a>
+        <a href="artist.html">Artists</a>
+        <a href="upload.html">Upload Video / Reel</a>
+      </nav>
+      <div class="header-actions">
+        <a class="sign-btn" href="signin.html">Sign in</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="auth-hero">
+      <div class="auth-hero-copy">
+        <h1>Create your channel as an <span>IMÜSIC★ Artist</span></h1>
+        <p>Join the music video community. Register your channel, upload music videos and customize your Artist World.</p>
+      </div>
+      <div class="auth-hero-brand">
+        <div class="brand-logo">IMÜSIC<span class="star">★</span></div>
+        <p>MUSIC CONNECTS US.</p>
+      </div>
+    </section>
+
+    <section class="auth-wrap">
+      <div class="auth-card">
+        <form class="auth-form" onsubmit="event.preventDefault();imusicRegister('email')">
+          <h2>Join <span>IMÜSIC</span></h2>
+          <div class="auth-sub">Create your artist account and share your music videos with the world.</div>
+
+          <button type="button" class="provider" onclick="imusicRegister('apple')">
+            <span class="apple-mark"></span> Continue with Apple
+          </button>
+          <button type="button" class="provider" onclick="imusicRegister('google')">
+            <span class="google-mark">G</span> Continue with Google
+          </button>
+
+          <div class="auth-or">OR REGISTER YOUR CHANNEL</div>
+
+          <div class="auth-field">
+            <span class="icon">♙</span>
+            <input id="registerFullName" required placeholder="Full name">
+          </div>
+
+          <div class="auth-field">
+            <span class="icon">★</span>
+            <input id="registerArtistName" required placeholder="Artist / channel name (e.g. DJ Nova, The Beats)">
+          </div>
+
+          <div class="auth-field">
+            <span class="icon">♪</span>
+            <input id="registerGenre" required placeholder="Music genre (e.g. Trap / Pop / Rock / Electronic)">
+          </div>
+
+          <div class="auth-field">
+            <span class="icon">⌖</span>
+            <input id="registerLocation" placeholder="City or country (e.g. Mexico City, London)">
+          </div>
+
+          <div class="auth-field">
+            <span class="icon">✉</span>
+            <input id="registerEmail" required type="email" placeholder="Email address">
+          </div>
+
+          <div class="auth-field">
+            <span class="icon">▣</span>
+            <input id="registerPassword" required type="password" minlength="8" autocomplete="new-password" placeholder="Password (8+ characters)">
+          </div>
+
+          <div class="auth-row">
+            <label><input required type="checkbox"> I accept the IMÜSIC Terms and understand that my music videos will be public</label>
+          </div>
+
+          <button class="auth-submit" type="submit">Create artist channel →</button>
+
+          <span class="auth-public">
+            Already have an account? <a href="signin.html">Sign in</a> · <a href="artist.html">Browse artist channels</a>
+          </span>
+        </form>
+
+        <aside class="auth-side">
+          <div class="auth-hand">“REAL PEOPLE.<br>REAL MUSIC.<br>A BRIGHTER TOMORROW.”</div>
+          <div class="auth-side-copy">
+            REGISTERED ARTISTS.<br>
+            PUBLIC VIDEOS.<br>
+            IMÜSIC CHANNELS ★
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="auth-footer">
+    <a class="brand" href="index.html"><div class="brand-logo">IMÜSIC<span class="star">★</span></div></a>
+    <div class="auth-footer-links">
+      <a href="index.html">Home</a>
+      <a href="artist.html">Artists</a>
+      <a href="upload.html">Upload Video</a>
+    </div>
+  </footer>
+</body>
+</html>

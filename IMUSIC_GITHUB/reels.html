@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>IMÜSIC★ — Public Music Reels & Shorts</title>
+  <meta name="description" content="Discover and upload music reels and shorts on IMÜSIC.">
+  <link rel="icon" href="assets/favicon.ico">
+  <link rel="stylesheet" href="css/styles.css">
+  <script type="module" src="js/video-db.js"></script>
+  <script type="module" src="js/state.js"></script>
+  <script type="module" src="js/auth.js"></script>
+  <script type="module" src="js/reels.js"></script>
+</head>
+<body class="reels-body">
+<div class="reels-shell">
+  <!-- SITE HEADER -->
+  <header class="site-header">
+    <div class="header-main">
+      <a class="brand" href="index.html">
+        <div class="brand-logo">IMÜSIC<span class="star">★</span></div>
+        <div class="brand-tag">MUSIC CONNECTS US.</div>
+      </a>
+      <nav class="main-nav"><a href="memberships.html">Memberships</a><a href="verification.html">Verification</a>
+        <a href="index.html">Home</a>
+        <a href="artist.html">Videos</a>
+        <a class="active" href="reels.html">Reels & Shorts ★</a>
+        <a href="artist.html#artistChannelsBar">Artists</a>
+        <a href="upload.html">＋ Upload</a>
+      </nav>
+      <div class="header-actions">
+        <a class="sign-btn" href="upload.html?type=reel" style="background:linear-gradient(90deg,#8b13f4,#b948ff);border:0">＋ Upload Reel</a>
+        <a class="sign-btn google" href="register.html">Create Channel</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- REELS FEED CONTAINER -->
+  <main class="reels-viewport-wrap">
+    <!-- Top Filter & Category Tabs -->
+    <div class="reels-top-bar">
+      <div class="reels-tabs">
+        <button id="tabVerified" class="reels-tab" onclick="switchReelsTab('verified')">
+          ★ Verified Artists Worldwide
+        </button>
+        <button id="tabAll" class="reels-tab active" onclick="switchReelsTab('all')">
+          🔥 For You (All Shorts)
+        </button>
+      </div>
+      <div class="reels-counter" id="reelsCounter">1 / 6</div>
+    </div>
+
+    <!-- Main Reel Phone Screen -->
+    <div class="reels-stage">
+      <!-- Ambient blurred backdrop for desktop cinematic feel -->
+      <div id="ambientBackdrop" class="reels-ambient"></div>
+
+      <!-- Navigation arrows for desktop -->
+      <button class="reel-nav-btn prev" onclick="prevReel()" title="Reel anterior (Flecha Arriba)">▲</button>
+      <button class="reel-nav-btn next" onclick="nextReel()" title="Siguiente Reel (Flecha Abajo)">▼</button>
+
+      <!-- The Phone Frame -->
+      <div class="reel-phone-frame" id="reelContainer">
+        <!-- Vertical Video -->
+        <video id="reelVideo" playsinline preload="auto" loop></video>
+
+        <!-- Tap to play/pause indicator -->
+        <div id="playStateBadge" class="reel-play-indicator">▶</div>
+
+        <!-- Top overlay: Watermark & controls -->
+        <div class="reel-top-overlay">
+          <div class="imusic-watermark" style="position:static;font-size:12px;padding:3.5px 8px">
+            imüsic<span class="star-mark">★</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <span class="reel-verified-pill" id="reelVerifiedBadge">
+              <span style="color:#d26cff">✓</span> Verified Artist
+            </span>
+            <button id="reelMuteBtn" class="reel-circle-btn" title="Silenciar / Activar sonido" onclick="toggleReelMute()">
+              🔊
+            </button>
+          </div>
+        </div>
+
+        <!-- Bottom progress line -->
+        <div class="reel-progress-line">
+          <div id="reelProgressBar" class="reel-progress-fill"></div>
+        </div>
+
+        <!-- Right Side Action Column (TikTok / Shorts style) -->
+        <aside class="reel-actions-column">
+          <!-- Artist Avatar & Follow -->
+          <div class="reel-action-item">
+            <div class="reel-avatar-wrap" onclick="goToCurrentArtist()">
+              <img id="reelArtistAvatar" src="assets/avatar.jpg" alt="Avatar">
+              <button class="reel-follow-badge" title="Seguir Artista" onclick="event.stopPropagation();toggleFollowReelArtist(this)">＋</button>
+            </div>
+          </div>
+
+          <!-- Like Button -->
+          <div class="reel-action-item">
+            <button id="reelLikeBtn" class="reel-icon-btn" onclick="likeCurrentReel()">
+              ♥
+            </button>
+            <span id="reelLikesCount" class="reel-action-label">42.1K</span>
+          </div>
+
+          <!-- Comments Button -->
+          <div class="reel-action-item">
+            <button class="reel-icon-btn" onclick="openCommentsDrawer()">
+              💬
+            </button>
+            <span id="reelCommentsCount" class="reel-action-label">842</span>
+          </div>
+
+          <!-- Share Button -->
+          <div class="reel-action-item">
+            <button class="reel-icon-btn" onclick="shareCurrentReel()">
+              ↗
+            </button>
+            <span class="reel-action-label">Share</span>
+          </div>
+
+          <!-- Upload Shortcut -->
+          <div class="reel-action-item">
+            <a href="upload.html?type=reel" class="reel-icon-btn" title="Upload tu propio Reel" style="text-decoration:none;display:grid;place-items:center;background:linear-gradient(135deg,#8b13f4,#b948ff);color:#fff">
+              ＋
+            </a>
+            <span class="reel-action-label">Upload</span>
+          </div>
+
+          <!-- Spinning Vinyl Disc -->
+          <div class="reel-action-item" style="margin-top:4px">
+            <div id="spinningDisc" class="spinning-disc" onclick="toast('Playing: ' + (currentReel?.sound || 'Music'))">
+              <img id="discCover" src="assets/avatar.jpg" alt="Audio">
+            </div>
+          </div>
+        </aside>
+
+        <!-- Bottom Content Overlay -->
+        <div class="reel-bottom-overlay">
+          <div class="reel-author-row" onclick="goToCurrentArtist()">
+            <span id="reelArtistName" class="reel-author-name">NYELO</span>
+            <span class="verified-check" title="Verified Channel Worldwide">★</span>
+            <button class="reel-view-channel-btn">View Channel ›</button>
+          </div>
+
+          <p id="reelCaption" class="reel-caption">
+            Behind the scenes of "Stars Tonight" in California 🎬✨ #Shorts #Reels #NYELO #BehindTheScenes
+          </p>
+
+          <div class="reel-sound-track">
+            <span class="music-icon">♫</span>
+            <div class="sound-marquee">
+              <span id="reelSoundTitle">NYELO — Stars Tonight (Original Sound ♫)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- COMMENTS DRAWER (SLIDE-OVER) -->
+  <div id="commentsDrawer" class="comments-drawer">
+    <div class="comments-drawer-header">
+      <div>
+        <b style="font-size:15px;color:#24153a">Comments (<span id="drawerCommentsCount">0</span>)</b>
+        <div style="font-size:11px;color:#786e85">IMÜSIC global community★</div>
+      </div>
+      <button class="drawer-close-btn" onclick="closeCommentsDrawer()">✕</button>
+    </div>
+
+    <div id="commentsDrawerList" class="comments-drawer-list">
+      <!-- Populated dynamically with reel comments -->
+    </div>
+
+    <form class="comments-drawer-form" onsubmit="submitReelComment(event)">
+      <img src="assets/fan-8.jpg" alt="You" style="width:34px;height:34px;border-radius:50%;object-fit:cover">
+      <input id="drawerCommentInput" placeholder="Add a comment about this reel..." required>
+      <button type="submit" class="primary-btn" style="width:auto;padding:8px 14px;font-size:12px;margin:0">Post</button>
+    </form>
+  </div>
+  <div id="commentsBackdrop" class="drawer-backdrop" onclick="closeCommentsDrawer()"></div>
+
+  <!-- FLOATING TOAST -->
+  <div id="toast" class="toast"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,6 @@
+{
+  "name": "IMÜSIC★",
+  "description": "A public music-video community and customizable Artist Worlds platform inspired by late-2000s profile culture.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

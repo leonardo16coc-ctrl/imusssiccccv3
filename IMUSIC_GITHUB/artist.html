@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>IMÜSIC★ — Artist Channels and Music Videos</title>
+  <meta name="description" content="Explore artist channels and music videos on IMÜSIC.">
+  <link rel="icon" href="assets/favicon.ico">
+  <link rel="stylesheet" href="css/styles.css">
+  <script type="module" src="js/video-db.js"></script>
+  <script type="module" src="js/state.js"></script>
+  <script type="module" src="js/auth.js"></script>
+  <script type="module" src="js/artist-page.js"></script>
+  <script type="module" src="js/app.js"></script>
+</head>
+<body>
+<div class="site-shell">
+  <!-- SITE HEADER -->
+  <header class="site-header">
+    <div class="header-main">
+      <a class="brand" href="index.html">
+        <div class="brand-logo">IMÜSIC<span class="star">★</span></div>
+        <div class="brand-tag">MUSIC CONNECTS US.</div>
+      </a>
+      <nav class="main-nav"><a href="memberships.html">Memberships</a><a href="verification.html">Verification</a>
+        <a href="index.html">Home</a>
+        <a class="active" href="artist.html">Videos</a>
+        <a href="reels.html" style="color:#e999ff">Reels & Shorts ★</a>
+        <a href="#artistChannelsBar">Artists</a>
+        <a href="upload.html">＋ Upload</a>
+        <a href="#comments">Community</a>
+      </nav>
+      <div class="header-actions">
+        <div class="searchbox">
+          <input id="globalSearchInput" placeholder="Search artistas, canciones o canales..." oninput="IMUSIC_ARTIST.filterArtists(this.value)">
+          <button onclick="IMUSIC_ARTIST.filterArtists(document.getElementById('globalSearchInput').value)">⌕</button>
+        </div>
+        <a class="sign-btn" href="upload.html?type=reel" style="background:linear-gradient(90deg,#8b13f4,#b948ff);border:0">＋ Upload Reel</a>
+        <a class="sign-btn google" href="register.html">Create Channel</a>
+      </div>
+    </div>
+    <div class="subbar">
+      <a href="reels.html">★ Global Reels & Shorts Feed</a>
+      <a href="#artistChannelsBar">Browse Artist Channels</a>
+      <a href="upload.html">Upload Video or Reel</a>
+      <a href="edit-profile.html">Edit My Profile</a>
+    </div>
+  </header>
+
+  <!-- REGISTERED ARTIST CHANNELS DIRECTORY BAR -->
+  <section id="artistChannelsBar" class="channels-bar">
+    <div class="channels-panel">
+      <div class="channels-header">
+        <div class="channels-title">
+          <span>★ Registered Artist Channels (<span id="registeredArtistsCount">4</span>)</span>
+          <span style="font-size:11px;font-weight:normal;color:#6b5f7d">— Select an artist to explore their IMÜSIC world</span>
+        </div>
+        <div class="channels-filter">
+          <input type="text" placeholder="Filtrar artistas por nombre..." oninput="IMUSIC_ARTIST.filterArtists(this.value)">
+          <a href="register.html" class="small-btn" style="text-decoration:none;font-size:11px;padding:6px 10px">＋ Register as an Artist</a>
+        </div>
+      </div>
+      <div id="artistChannelsGrid" class="channels-grid">
+        <!-- Populated dynamically with all registered artists -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ACTIVE ARTIST'S WORLD -->
+  <div class="artist-world" data-world style="margin-top:10px">
+    <section class="artist-banner" data-banner>
+      <div class="banner-note left">A HIGHER<br>KIND OF REAL.</div>
+      <div class="banner-name"><span data-artist-name>NYELO</span><span class="doodle-star">★</span></div>
+      <div class="banner-note right">GOOD SONGS<br>BRIGHTER DAYS.<br>★</div>
+    </section>
+
+    <main class="profile-grid">
+      <!-- ARTIST PROFILE CARD -->
+      <aside class="panel profile-card">
+        <img class="profile-photo" data-avatar src="assets/avatar.jpg" alt="Artist avatar">
+        <div class="profile-info">
+          <h1><span data-artist-name>NYELO</span> <span>★</span> <span class="verified" title="Artist Verified · sample profile" aria-label="Verified artist demo">✓</span></h1>
+          <div class="tagline">“<span data-tagline>just a kid with big dreams.</span>”</div>
+          <div class="info-line">⌖ <span data-location>Los Angeles, CA</span></div>
+          <div class="info-line">◆ <span data-genre>Pop / R&B / Alternative</span></div>
+          <div class="info-line">▣ Joined: <span data-joined>Mar 22, 2009</span></div>
+
+          <button class="primary-btn" onclick="toggleFriend(this)">＋ Add as Friend</button>
+          <a id="artistReelsProfileLink" href="reels.html" class="profile-edit-link" style="background:#f9f0ff;border-color:#a832ff;color:#7e1ac7;text-decoration:none">📱 Watch Reels & Shorts (TikTok) ★</a>
+          <a href="upload.html" class="profile-edit-link" style="background:#f3e8ff;text-decoration:none">★ Upload to this Channel</a>
+          <a href="upload.html?type=reel" class="profile-edit-link" style="background:#1b1029;color:#fff;border-color:#7c32bf;text-decoration:none">＋ Upload Vertical Reel</a>
+        </div>
+
+        <div class="profile-actions">
+          <a href="edit-profile.html" class="text-btn" style="text-decoration:none">✎ Customize this Profile</a>
+          <button class="text-btn" onclick="shareProfile()">↗ Share Channel</button>
+          <button class="text-btn">✉ Send Message</button>
+        </div>
+
+        <div class="stats-table">
+          <div><span>Subscribers</span><b data-subscribers>892,341</b></div>
+          <div><span>Video Views</span><b data-total-views>124,509,317</b></div>
+          <div><span>Channel Views</span><b data-channel-views>4,231,908</b></div>
+        </div>
+
+        <div class="socials"><a data-apple-music hidden target="_blank" rel="noopener noreferrer">♫ Listen on Apple Music</a>
+          <a>◉ Official Website</a>
+          <a>♥ Twitter</a>
+          <a>◎ Instagram</a>
+          <a>♪ TikTok</a>
+          <a>▣ MySpace</a>
+        </div>
+
+        <div class="hand-note">
+          MUSIC<br>CONNECTS<br>US. ★
+        </div>
+      </aside>
+
+      <!-- PUBLIC VIDEO PLAYER -->
+      <section id="playerSection" class="panel video-panel">
+        <div class="player-container">
+          <video id="mainVideoPlayer" playsinline preload="metadata"></video>
+          <div class="player-watermark" title="Canal Oficial IMÜSIC">imüsic<span class="wm-star">★</span></div>
+          <div id="playerOverlayPlay" class="player-overlay-play">▶</div>
+        </div>
+
+        <!-- RETRO CONTROLS BAR -->
+        <div class="retro-controls">
+          <button id="playerPlayPauseBtn" class="retro-btn" title="Play/Pause">▶</button>
+          <button id="playerMuteBtn" class="retro-btn" title="Silenciar">🔊</button>
+          <span id="playerTimeDisplay" class="retro-time">0:00 / 0:00</span>
+          <div id="playerProgressWrap" class="retro-progress-wrap" title="Click to seek">
+            <div class="retro-progress-bg">
+              <div id="playerProgressFill" class="retro-progress-fill"></div>
+            </div>
+          </div>
+          <span class="retro-badge">HQ 360p</span>
+          <button id="playerFullscreenBtn" class="retro-btn" title="Pantalla Completa">⛶</button>
+        </div>
+
+        <div class="video-copy">
+          <div class="video-title-row">
+            <h2 id="playerVideoTitle"><span data-artist-name>NYELO</span> ★ — Stars Tonight (Official Music Video)</h2>
+            <b id="playerVideoViews">2,348,921 views</b>
+          </div>
+          <div id="playerVideoFrom" style="color:#6d6179">
+            De: <b style="color:var(--purple)" data-artist-name>NYELO</b> · Nov 14, 2023 · <span style="color:#008822;font-weight:bold">● Public</span>
+          </div>
+          <p id="playerVideoDescription">Stars Tonight is about finding yourself, even when the world feels too loud.</p>
+
+          <div class="video-actions" data-module="likes">
+            <button id="videoLikeBtn" data-like>♡ Like (24K)</button>
+            <a href="upload.html" style="text-decoration:none">
+              <button style="background:var(--purple);color:#fff;border-color:var(--purple)">＋ Upload my Video</button>
+            </a>
+            <a href="reels.html" style="text-decoration:none">
+              <button style="background:#1b1029;color:#e88fff;border-color:#5c2494">📱 Watch Reels & Shorts ★</button>
+            </a>
+            <button onclick="shareProfile()">↗ Share Video</button>
+            <button>☷ Save to Playlist</button>
+            <button>⚑ Report</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ARTIST'S VERIFIED REELS & SHORTS -->
+      <aside class="panel reels-col">
+        <div class="panel-title">
+          <span id="artistReelsCountSpan">Artist Reels & Shorts ★</span>
+          <a id="uploadReelChannelLink" href="upload.html?type=reel">＋ Upload Reel ›</a>
+        </div>
+        <div id="artistReelsList">
+          <!-- Populated dynamically with verified vertical reels of active artist -->
+        </div>
+      </aside>
+
+      <!-- ARTIST'S PUBLIC UPLOADS -->
+      <aside class="panel uploads-col" data-module="uploads">
+        <div class="panel-title">
+          <span id="uploadsCountSpan">Artist Uploads</span>
+          <a href="upload.html">＋ Upload Video ›</a>
+        </div>
+        <div id="artistUploadsList">
+          <!-- Populated dynamically with public videos of active artist -->
+        </div>
+      </aside>
+
+      <!-- RELATED COMMUNITY VIDEOS -->
+      <aside class="panel related-col">
+        <div class="panel-title">
+          <span>Community Music Videos</span>
+        </div>
+        <div id="relatedVideosList">
+          <!-- Populated dynamically with videos from other artists -->
+        </div>
+      </aside>
+
+      <!-- RECENT ACTIVITY -->
+      <section class="panel activity-panel" data-module="activity">
+        <div class="panel-title"><span>Recent Channel Activity</span><a>View All ›</a></div>
+        <div class="activity-row">
+          <img src="assets/fan-1.jpg" alt="Actividad">
+          <div>
+            <b style="color:var(--purple)"><span data-artist-name>NYELO</span> ★</b> published a new music video.
+            <small>2 hours ago</small>
+          </div>
+        </div>
+        <div class="activity-row">
+          <img src="assets/fan-2.jpg" alt="Actividad">
+          <div>
+            <b style="color:var(--purple)"><span data-artist-name>NYELO</span> ★</b> updated their Artist World design.
+            <small>2 days ago</small>
+          </div>
+        </div>
+      </section>
+
+      <!-- PLAYLISTS -->
+      <aside class="panel" data-module="playlists">
+        <div class="panel-title"><span>Public Playlists</span><a>View All ›</a></div>
+        <div class="playlist-item">
+          <div class="video-thumb-wrap">
+            <img src="assets/upload-1.jpg" alt="Playlist">
+            <span class="imusic-watermark">imüsic<span class="star-mark">★</span></span>
+          </div>
+          <div><b>Official Videos</b><small>12 videos</small></div>
+        </div>
+        <div class="playlist-item">
+          <div class="video-thumb-wrap">
+            <img src="assets/upload-2.jpg" alt="Playlist">
+            <span class="imusic-watermark">imüsic<span class="star-mark">★</span></span>
+          </div>
+          <div><b>Acoustic Sessions</b><small>8 videos</small></div>
+        </div>
+        <div class="playlist-item">
+          <div class="video-thumb-wrap">
+            <img src="assets/upload-3.jpg" alt="Playlist">
+            <span class="imusic-watermark">imüsic<span class="star-mark">★</span></span>
+          </div>
+          <div><b>Behind the Music</b><small>14 videos</small></div>
+        </div>
+      </aside>
+
+      <!-- FANS -->
+      <aside class="panel related-col" data-module="fans">
+        <div class="panel-title"><span>Channel Fans and Friends</span><a>View All ›</a></div>
+        <div class="fans">
+          <div class="fan"><img src="assets/fan-1.jpg" alt="Fan">luv4music</div>
+          <div class="fan"><img src="assets/fan-2.jpg" alt="Fan">stargirl08</div>
+          <div class="fan"><img src="assets/fan-3.jpg" alt="Fan">musiclife</div>
+          <div class="fan"><img src="assets/fan-4.jpg" alt="Fan">jooniera</div>
+          <div class="fan"><img src="assets/fan-5.jpg" alt="Fan">daydreamz</div>
+          <div class="fan"><img src="assets/fan-6.jpg" alt="Fan">neonheart</div>
+          <div class="fan"><img src="assets/fan-7.jpg" alt="Fan">ellie.wav</div>
+          <div class="fan"><img src="assets/fan-8.jpg" alt="Fan">sk8erboii</div>
+        </div>
+      </aside>
+
+      <!-- COMMENTS SECTION -->
+      <section id="comments" class="panel comments-panel" data-module="comments">
+        <div class="panel-title"><span>Channel Comments</span><a>Add Comment</a></div>
+        <div id="commentList">
+          <div class="comment-row">
+            <img src="assets/fan-1.jpg" alt="Usuario">
+            <div>
+              <b style="color:var(--purple)">stargirl08</b>
+              <p>Incredible sound and production. Love from Mexico! ★</p>
+            </div>
+            <div class="comment-count">♡ 24</div>
+          </div>
+          <div class="comment-row">
+            <img src="assets/fan-2.jpg" alt="Usuario">
+            <div>
+              <b style="color:var(--purple)">musiclife101</b>
+              <p>Your music feels real. Thanks for sharing it on IMÜSIC!</p>
+            </div>
+            <div class="comment-count">♡ 17</div>
+          </div>
+          <div class="comment-row">
+            <img src="assets/fan-3.jpg" alt="Usuario">
+            <div>
+              <b style="color:var(--purple)">sk8erboii</b>
+              <p>Great music video. Keep sharing your songs!</p>
+            </div>
+            <div class="comment-count">♡ 9</div>
+          </div>
+        </div>
+        <div class="comment-box">
+          <input id="commentInput" placeholder="Leave a comment for this artist...">
+          <button class="small-btn" onclick="addComment()">Post</button>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <aside class="panel related-col">
+        <div class="community-cta">
+          <div class="cta-content">
+            <h3>REAL PEOPLE.<br>REAL MUSIC.<br>A BRIGHTER TOMORROW.</h3>
+            <a href="register.html">
+              <button class="primary-btn">REGISTER MY CHANNEL →</button>
+            </a>
+          </div>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <a class="brand" href="index.html">
+        <div class="brand-logo">IMÜSIC<span class="star">★</span></div>
+        <div class="brand-tag">MUSIC CONNECTS US.</div>
+      </a>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="artist.html">Videos</a>
+        <a href="#artistChannelsBar">Artists</a>
+        <a href="upload.html">Upload Video</a>
+        <a href="register.html">Register Channel</a>
+        <a>About</a>
+        <a>Privacy</a>
+        <a>Terms</a>
+      </div>
+      <div class="footer-note">GOOD MUSIC.<br>BETTER PEOPLE. ★</div>
+    </div>
+  </footer>
+</div>
+
+<div id="toast" class="toast"></div>
+</body>
+</html>
